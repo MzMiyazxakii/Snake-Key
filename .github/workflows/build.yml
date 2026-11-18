@@ -15,6 +15,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Restore bundled death sound
+        run: |
+          base64 -d src/main/resources/assets/snakegame/sounds/death.ogg.b64 > src/main/resources/assets/snakegame/sounds/death.ogg
+          rm src/main/resources/assets/snakegame/sounds/death.ogg.b64
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
