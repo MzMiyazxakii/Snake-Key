@@ -6,7 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import dev.test.snakegame.ModSounds;
 import org.lwjgl.glfw.GLFW;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,8 @@ public class SnakeScreen extends Screen {
     private void placeFood(){ do{ food=new CellPos(random.nextInt(COLS),random.nextInt(ROWS)); }while(snake.contains(food)); }
     @Override public void tick(){ super.tick(); if(gameOver)return; if(++ticks>=5){ticks=0;moveSnake();} }
     private void playDeathSound(){
-        SoundEvent death=SoundEvent.createVariableRangeEvent(new ResourceLocation("snakegame","death"));
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(death,1.0F));
+        Minecraft.getInstance().getSoundManager().play(
+                SimpleSoundInstance.forUI(ModSounds.DEATH.get(), 1.0F));
     }
     private void moveSnake(){
         dx=queuedDx; dy=queuedDy; CellPos head=snake.get(0); CellPos next=new CellPos(head.x+dx,head.y+dy);
